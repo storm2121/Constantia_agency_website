@@ -1,0 +1,44 @@
+{
+  "name": "constantia-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "seed:firebase-content": "node scripts/seed-firebase-content.js",
+    "import:photo:firebase": "node scripts/import-photography-from-storage.js",
+    "import:video:firebase": "node scripts/import-videography-from-local.js",
+    "import:motion:firebase": "node scripts/import-motion-from-local.js",
+    "import:design:firebase": "node scripts/import-graphic-design-from-local.js",
+    "deploy:firebase": "firebase deploy --only hosting",
+    "deploy:firebase:preview": "firebase hosting:channel:deploy preview"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^3.0.41",
+    "@gsap/react": "^2.1.2",
+    "ai": "^6.0.116",
+    "firebase-admin": "^13.7.0",
+    "framer-motion": "^12.35.0",
+    "gsap": "^3.14.2",
+    "hls.js": "^1.6.15",
+    "lenis": "^1.3.18",
+    "lucide-react": "^0.577.0",
+    "next": "16.1.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

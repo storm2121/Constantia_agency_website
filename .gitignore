@@ -1,0 +1,95 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# ---------------------------------------------------------------------------
+# Dependencies
+# ---------------------------------------------------------------------------
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# ---------------------------------------------------------------------------
+# Build output
+# ---------------------------------------------------------------------------
+/.next/
+/out/
+/build
+/coverage
+*.tsbuildinfo
+next-env.d.ts
+
+# ---------------------------------------------------------------------------
+# Credentials — never commit any of these
+# ---------------------------------------------------------------------------
+.env*
+!.env.example
+*.pem
+*.key
+service-account*.json
+firebase-service-account*.json
+**/serviceAccountKey.json
+gcloud-*.json
+
+# ---------------------------------------------------------------------------
+# Firebase / deploy artifacts
+# ---------------------------------------------------------------------------
+/.firebase/
+firebase-debug.log*
+firestore-debug.log*
+ui-debug.log*
+
+# ---------------------------------------------------------------------------
+# Media assets — NOT distributed with this repository
+#
+# public/ holds client work, licensed photography, team portraits and a
+# commercially licensed typeface. None of it is ours to redistribute, so the
+# whole directory is excluded. See public/README.md for the expected layout
+# and ask the maintainer for the asset bundle.
+# ---------------------------------------------------------------------------
+/public/*
+!/public/README.md
+
+# ---------------------------------------------------------------------------
+# Scratch / tooling leftovers
+# ---------------------------------------------------------------------------
+/.codex-temp/
+/artifacts/
+/test-results/
+/playwright-report/
+
+# submissions/ is a drop folder for media awaiting import. The example
+# manifest.json files are documentation (referenced by storageguide.md);
+# the media itself must never be committed.
+/submissions/**/*.mp4
+/submissions/**/*.mov
+/submissions/**/*.jpg
+/submissions/**/*.jpeg
+/submissions/**/*.png
+/submissions/**/*.webp
+
+# ---------------------------------------------------------------------------
+# Editor / OS
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# ---------------------------------------------------------------------------
+# Debug logs
+# ---------------------------------------------------------------------------
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ---------------------------------------------------------------------------
+# Vercel
+# ---------------------------------------------------------------------------
+.vercel

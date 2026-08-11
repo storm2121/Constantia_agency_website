@@ -1,0 +1,39 @@
+Copyright (c) 2026 Constantia Agency. All rights reserved.
+
+This source code is published for reference and portfolio purposes only.
+
+You MAY:
+  - View, read and study this source code.
+  - Quote short excerpts with attribution, for commentary or educational
+    purposes.
+
+You MAY NOT, without prior written permission from Constantia Agency:
+  - Copy, redistribute, or republish this repository in whole or in
+    substantial part.
+  - Use this source code, or derivative works of it, in any commercial or
+    non-commercial project.
+  - Reuse the Constantia name, wordmark, brand identity, copy, or visual
+    design.
+
+MEDIA AND THIRD-PARTY ASSETS
+
+Media referenced by this project - photography, video, client project work,
+team portraits and typefaces - is deliberately NOT included in this
+repository. Those assets are owned by Constantia Agency, by its clients, or
+by their respective rights holders, and are licensed to Constantia Agency
+only. No rights to them are granted by this repository, and their absence
+from it is not an oversight.
+
+The typeface referenced in `src/app/globals.css` (Labil Grotesk) is
+commercially licensed and is not distributed here. Anyone building this
+project must supply their own licensed copy.
+
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+For permissions and enquiries: h.lachheb@constantia.ma

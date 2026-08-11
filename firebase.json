@@ -1,0 +1,27 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "hosting": {
+    "public": "out",
+    "predeploy": [
+      "npm run build"
+    ],
+    "cleanUrls": true,
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "redirects": [
+      {
+        "source": "/talents/jad-tounsi",
+        "destination": "/talents/mohamed-el-hansali",
+        "type": 302
+      }
+    ]
+  }
+}

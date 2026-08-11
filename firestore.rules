@@ -1,0 +1,25 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /talents/{talentId} {
+      allow read: if resource.data.published == true;
+      allow write: if false;
+    }
+
+    match /portfolioSummaries/{slug} {
+      allow read: if resource.data.published == true;
+      allow write: if false;
+    }
+
+    match /portfolioDetails/{slug} {
+      allow read: if resource.data.published == true;
+      allow write: if false;
+    }
+
+    match /{document=**} {
+      allow read: if false;
+      allow write: if false;
+    }
+  }
+}

@@ -1,0 +1,384 @@
+.content {
+  min-width: 0;
+}
+
+.heroButton,
+.thumbButton {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.heroStatic {
+  display: block;
+  width: 100%;
+}
+
+.heroVisual,
+.thumbVisual {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0%, rgba(228, 219, 205, 0.92) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 18px 40px rgba(165, 130, 96, 0.1);
+}
+
+.heroVisual {
+  height: 245px;
+  border-radius: 23px;
+}
+
+.thumbVisual {
+  height: 148px;
+  border-radius: 18px;
+}
+
+.mediaLaunch {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.embeddedMedia {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+  background: #080706;
+}
+
+.playBadge {
+  position: absolute;
+  inset: auto auto 18px 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: rgba(20, 16, 12, 0.78);
+  color: rgba(255, 247, 238, 0.94);
+  box-shadow: 0 16px 28px rgba(15, 10, 8, 0.18);
+}
+
+.gridPlayBadge {
+  inset: auto auto 14px 14px;
+  width: 44px;
+  height: 44px;
+  background: rgba(18, 14, 11, 0.74);
+}
+
+.title {
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 5.7vw, 5rem);
+  line-height: 0.88;
+  letter-spacing: -0.08em;
+  text-transform: uppercase;
+  color: #17110d;
+}
+
+.titleLead {
+  margin-top: 0;
+}
+
+.supportGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px 22px;
+  margin-top: 26px;
+}
+
+.motionPosterButton {
+  color: inherit;
+}
+
+.motionPosterFrame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 9 / 16;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0%, rgba(228, 219, 205, 0.92) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 18px 40px rgba(165, 130, 96, 0.1);
+}
+
+.motionRailPlayBadge {
+  inset: auto auto 14px 14px;
+  width: 44px;
+  height: 44px;
+  background: rgba(18, 14, 11, 0.74);
+}
+
+.motionPosterInfo {
+  margin-top: 14px;
+  padding-right: 8px;
+}
+
+.motionPosterMetaRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.motionPosterSequence {
+  font-family: var(--font-inter);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #b57a59;
+}
+
+.motionPosterDivider {
+  width: 18px;
+  height: 1px;
+  background: rgba(23, 17, 13, 0.18);
+}
+
+.motionPosterLabel {
+  font-family: var(--font-inter);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(23, 17, 13, 0.42);
+}
+
+.motionPosterTitle {
+  margin-top: 10px;
+  display: -webkit-box;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: clamp(1.18rem, 1.75vw, 1.58rem);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  color: #17110d;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.motionPosterRail {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 26px;
+  margin-top: 28px;
+  align-items: start;
+}
+
+.heroButton:hover .image,
+.thumbButton:hover .image,
+.mediaLaunch:hover .image {
+  transform: scale(1.025);
+}
+
+.heroButton :global(img),
+.thumbButton :global(img),
+.mediaLaunch :global(img) {
+  transition: transform 360ms ease;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(14, 11, 8, 0.78);
+  backdrop-filter: blur(6px);
+}
+
+.overlayInner {
+  position: relative;
+  width: min(1110px, calc(100vw - 180px));
+  height: min(660px, calc(100vh - 120px));
+  border-radius: 24px;
+  overflow: hidden;
+  background: rgba(11, 9, 7, 0.9);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+}
+
+.overlayImage {
+  object-fit: cover;
+}
+
+.videoOverlayInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 26px;
+}
+
+.overlayVideo {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: contain;
+  background: #050403;
+  border-radius: 18px;
+}
+
+.overlayVideoMeta {
+  position: absolute;
+  left: 26px;
+  right: 26px;
+  bottom: 18px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.overlayVideoTitle {
+  display: inline-flex;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(248, 239, 226, 0.92);
+  color: #17110d;
+  font-family: var(--font-inter);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.overlayClose {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  background: transparent;
+  color: rgba(230, 216, 195, 0.78);
+  cursor: pointer;
+}
+
+.navButton {
+  position: fixed;
+  top: 50%;
+  z-index: 221;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border: 0;
+  background: transparent;
+  color: rgba(230, 216, 195, 0.72);
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.navButtonLeft {
+  left: 18px;
+}
+
+.navButtonRight {
+  right: 18px;
+}
+
+@media (max-width: 1100px) {
+  .title {
+    font-size: clamp(3.2rem, 7vw, 4.3rem);
+  }
+
+  .supportGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .heroVisual {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .title {
+    margin-top: 16px;
+    font-size: clamp(2.45rem, 11vw, 3.5rem);
+  }
+
+  .titleLead {
+    margin-top: 0;
+  }
+
+  .motionPosterRail {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 24px;
+  }
+
+  .supportGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .thumbVisual {
+    height: auto;
+    aspect-ratio: 16 / 11;
+  }
+
+  .overlay {
+    padding: 0 16px;
+  }
+
+  .overlayInner {
+    width: min(100%, calc(100vw - 32px));
+    height: min(72vh, calc(100vh - 120px));
+    border-radius: 20px;
+  }
+
+  .playBadge {
+    inset: auto auto 14px 14px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .gridPlayBadge {
+    width: 40px;
+    height: 40px;
+  }
+
+  .overlayClose {
+    top: 14px;
+    right: 14px;
+  }
+
+  .videoOverlayInner {
+    padding: 18px;
+  }
+
+  .overlayVideoMeta {
+    left: 18px;
+    right: 18px;
+    bottom: 14px;
+  }
+
+  .navButtonLeft {
+    left: 4px;
+  }
+
+  .navButtonRight {
+    right: 4px;
+  }
+}

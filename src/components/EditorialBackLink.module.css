@@ -1,0 +1,42 @@
+.control {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(23, 17, 13, 0.46);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-align: left;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 300ms ease;
+}
+
+.control:hover,
+.control:focus-visible {
+  color: rgba(23, 17, 13, 0.78);
+  outline: none;
+}
+
+.line {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  transition: width 300ms ease;
+}
+
+.control:hover .line,
+.control:focus-visible .line {
+  width: 40px;
+}
+
+.label {
+  display: block;
+}

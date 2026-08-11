@@ -1,0 +1,19 @@
+[
+  {
+    "origin": [
+      "https://constantia-agency.web.app",
+      "https://constantia-agency.firebaseapp.com",
+      "http://localhost:3000",
+      "http://127.0.0.1:3000"
+    ],
+    "method": ["GET", "HEAD", "OPTIONS"],
+    "responseHeader": [
+      "Content-Type",
+      "Accept-Ranges",
+      "Content-Length",
+      "Content-Range",
+      "Range"
+    ],
+    "maxAgeSeconds": 3600
+  }
+]

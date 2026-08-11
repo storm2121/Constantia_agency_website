@@ -1,0 +1,683 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+}
+
+/* Labil Grotesk — files must be placed in /public/fonts/labil-grotesk/ */
+@font-face {
+  font-family: 'Labil Grotesk';
+  src: url('/fonts/labil-grotesk/LabilGrotesk-Regular.woff2') format('woff2'),
+       url('/fonts/labil-grotesk/LabilGrotesk-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --c-cyan: #61cbf8;
+  --c-primary: #61cbf8;
+  --c-gray: #cdcdcd;
+  --ease-out-cubic: cubic-bezier(.33, 1, .68, 1);
+  --ease-out-curve: cubic-bezier(.35, .2, 0, 1);
+  --ease-in-out-cubic: cubic-bezier(.65, 0, .35, 1);
+  --ease-snappy: cubic-bezier(.22, 1, .36, 1);
+  --font-display: 'Labil Grotesk', sans-serif;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+/* Scroll lock — applied from first paint, removed by LoadingScreen when done.
+   Desktop only. On mobile the lock would freeze the page at SSR and then
+   jump to an arbitrary scroll position when removed after hydration. */
+@media (min-width: 1024px) {
+  html.scroll-locked,
+  html.scroll-locked body {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+    touch-action: none !important;
+  }
+}
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+/* Base reset */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: auto; }
+
+body {
+  background: #cdcdcd;
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img, video { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+button, input, textarea { font: inherit; }
+button { cursor: pointer; border: none; background: none; }
+
+::selection { background: #61cbf8; color: #0a0a0a; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.08); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.2); }
+
+/* SplitText helper */
+.split-word { display: inline-block; }
+
+/* DeviceGate boot placeholder (briefly visible before matchMedia resolves) */
+.dg-boot {
+  min-height: 100svh;
+  background: #0d0e12;
+}
+
+/* ============================================================
+   MOBILE DESIGN SYSTEM — scoped to mobile tree only.
+   One set of tokens every m-* component reads from.
+   ============================================================ */
+@media (max-width: 1023.98px) {
+  :root {
+    /* Palette — warm charcoal with a faint blue undertone, not pure black.
+       Feels inhabited, not dead. */
+    --m-bg:         #0d0e12;
+    --m-bg-soft:    #15161b;
+    --m-bg-elev:    #1b1d24;
+    --m-bg-line:    #23252d;
+    --m-bg-warm:    #1a1612; /* used for warm-accent panels */
+
+    /* Ink (text) — slightly warm whites, easier on the eyes */
+    --m-ink-hi:     rgba(255,248,240,0.98);
+    --m-ink-mid:    rgba(255,248,240,0.72);
+    --m-ink-lo:     rgba(255,248,240,0.48);
+    --m-ink-muted:  rgba(255,248,240,0.28);
+
+    /* Strokes */
+    --m-border:          rgba(255,245,235,0.10);
+    --m-border-strong:   rgba(255,245,235,0.22);
+
+    /* Accent — used sparingly, always as a functional cue */
+    --m-accent:       #61cbf8;
+    --m-accent-dim:   rgba(97,203,248,0.85);
+    --m-accent-soft:  rgba(97,203,248,0.14);
+    --m-accent-glow:  rgba(97,203,248,0.35);
+    --m-accent-deep:  #1a7eb0;
+
+    /* Warm counterpoint — creates tension against cyan */
+    --m-warm:         #f3c28a;
+    --m-warm-soft:    rgba(243,194,138,0.14);
+    --m-warm-glow:    rgba(243,194,138,0.32);
+
+    /* Rose — for CTAs that need emotional heat */
+    --m-rose:         #e8718e;
+    --m-rose-soft:    rgba(232,113,142,0.14);
+
+    /* Spacing */
+    --m-sp-1: 0.25rem;
+    --m-sp-2: 0.5rem;
+    --m-sp-3: 0.75rem;
+    --m-sp-4: 1rem;
+    --m-sp-5: 1.25rem;
+    --m-sp-6: 1.75rem;
+    --m-sp-7: 2.5rem;
+    --m-sp-8: 3.5rem;
+    --m-sp-9: 5rem;
+    --m-sp-10: 6.5rem;
+
+    /* Horizontal page padding — consistent gutter everywhere */
+    --m-pad-x: clamp(1.25rem, 5.5vw, 1.75rem);
+
+    /* Radius */
+    --m-r-sm: 10px;
+    --m-r-md: 14px;
+    --m-r-lg: 20px;
+    --m-r-xl: 28px;
+
+    /* Motion */
+    --m-ease:       cubic-bezier(0.22, 1, 0.36, 1);
+    --m-ease-snap:  cubic-bezier(0.65, 0, 0.35, 1);
+    --m-dur-fast:   180ms;
+    --m-dur:        320ms;
+    --m-dur-slow:   620ms;
+
+    /* Touch target minimum */
+    --m-tap: 44px;
+
+    /* iOS safe-area */
+    --m-safe-t: env(safe-area-inset-top, 0px);
+    --m-safe-b: env(safe-area-inset-bottom, 0px);
+
+    /* Z-index scale */
+    --m-z-nav:    100;
+    --m-z-menu:   200;
+    --m-z-modal:  300;
+  }
+
+  /* Base styling applied to mobile viewport (mobile tree only renders here) */
+  body {
+    color: var(--m-ink-hi);
+    background: var(--m-bg);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* Never allow horizontal scroll on mobile */
+  html, body { overflow-x: hidden; }
+
+  /* Default ink color for text elements */
+  p, h1, h2, h3, h4, span, a, li {
+    color: inherit;
+  }
+
+  /* Form inputs never trigger iOS auto-zoom (needs 16px minimum) */
+  input, textarea, select {
+    font-size: 16px;
+  }
+
+  /* Images + videos behave predictably */
+  img, video {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Links never show default underline unless asked */
+  a { color: inherit; text-decoration: none; }
+
+  /* Reusable utility classes used across m-* components */
+  .m-eyebrow {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--m-ink-lo);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .m-eyebrow::before {
+    content: '';
+    width: 18px;
+    height: 1px;
+    background: var(--m-accent);
+  }
+  .m-eyebrow--plain::before { display: none; }
+
+  .m-h1 {
+    font-family: var(--font-display), 'Labil Grotesk', sans-serif;
+    font-weight: 400;
+    font-size: clamp(2.6rem, 12vw, 4.25rem);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    color: var(--m-ink-hi);
+  }
+  .m-h1 em {
+    font-style: italic;
+    color: var(--m-accent-dim);
+  }
+
+  .m-h2 {
+    font-family: var(--font-display), 'Labil Grotesk', sans-serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 8.5vw, 3.1rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--m-ink-hi);
+  }
+  .m-h2 em {
+    font-style: italic;
+    color: var(--m-accent-dim);
+  }
+
+  .m-lead {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.62;
+    color: var(--m-ink-mid);
+    max-width: 34ch;
+  }
+
+  .m-body {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 0.94rem;
+    line-height: 1.6;
+    color: var(--m-ink-mid);
+  }
+
+  /* Focus ring — visible for keyboard users, hidden for pointer */
+  :focus-visible {
+    outline: 2px solid var(--m-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* --- Frame: locked aspect-ratio media container ------------- */
+  .m-frame {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: var(--m-bg-soft);
+    border-radius: var(--m-r-md);
+    isolation: isolate;
+  }
+  .m-frame > img,
+  .m-frame > video,
+  .m-frame img,
+  .m-frame video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .m-frame--34   { aspect-ratio: 3 / 4; }
+  .m-frame--45   { aspect-ratio: 4 / 5; }
+  .m-frame--11   { aspect-ratio: 1 / 1; }
+  .m-frame--43   { aspect-ratio: 4 / 3; }
+  .m-frame--32   { aspect-ratio: 3 / 2; }
+  .m-frame--169  { aspect-ratio: 16 / 9; }
+  .m-frame--1610 { aspect-ratio: 16 / 10; }
+  .m-frame--21   { aspect-ratio: 2 / 1; }
+  .m-frame--r-lg { border-radius: var(--m-r-lg); }
+  .m-frame--r-xl { border-radius: var(--m-r-xl); }
+  .m-frame--plain { border-radius: 0; }
+
+  /* Subtle inner border that reads as a frame, not a card edge */
+  .m-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  /* Grain overlay reusable via child element */
+  .m-grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.055;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    z-index: 2;
+  }
+
+  /* Vignette for media (top-to-bottom darken) */
+  .m-vign-bottom {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(10,10,10,0.78) 0%, rgba(10,10,10,0.08) 55%, rgba(10,10,10,0) 80%);
+    z-index: 1;
+  }
+  .m-vign-top {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0) 40%);
+    z-index: 1;
+  }
+
+  /* --- Section: no more hard borders. Use bleeds. ------------- */
+  .m-section {
+    position: relative;
+    padding: var(--m-sp-9) var(--m-pad-x);
+  }
+  .m-section--tight { padding: var(--m-sp-8) var(--m-pad-x); }
+  .m-section--flush { padding-top: 0; padding-bottom: 0; }
+
+  /* Gradient bleed at section top — replaces 1px hairline */
+  .m-bleed-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
+    z-index: 0;
+  }
+  .m-bleed-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
+    z-index: 0;
+  }
+
+  .m-section > * { position: relative; z-index: 1; }
+
+  /* --- Unified buttons ---------------------------------------- */
+  .m-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: var(--m-tap);
+    padding: 0 1.25rem;
+    border-radius: 999px;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition:
+      transform var(--m-dur-fast) var(--m-ease),
+      background var(--m-dur) var(--m-ease),
+      color var(--m-dur) var(--m-ease),
+      border-color var(--m-dur) var(--m-ease);
+    -webkit-tap-highlight-color: transparent;
+    white-space: nowrap;
+  }
+  .m-btn:active { transform: scale(0.97); }
+  .m-btn--primary {
+    background: #fff8f0;
+    color: #0d0e12;
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    box-shadow:
+      0 0 0 1px rgba(255,248,240,0.9) inset,
+      0 10px 28px -12px rgba(255,220,190,0.55),
+      0 2px 0 rgba(0,0,0,0.35);
+  }
+  .m-btn--primary:active {
+    background: #ffeed9;
+  }
+  .m-btn--accent {
+    background: var(--m-accent);
+    color: #06131d;
+    font-weight: 600;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.4) inset,
+      0 10px 28px -10px var(--m-accent-glow);
+  }
+  .m-btn--warm {
+    background: var(--m-warm);
+    color: #1a1207;
+    font-weight: 600;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.35) inset,
+      0 10px 28px -10px var(--m-warm-glow);
+  }
+  .m-btn--ghost {
+    background: rgba(255,248,240,0.04);
+    color: var(--m-ink-hi);
+    border-color: var(--m-border-strong);
+    font-weight: 500;
+  }
+  .m-btn--ghost:active {
+    border-color: var(--m-accent);
+    background: rgba(97,203,248,0.08);
+  }
+  .m-btn--link {
+    padding: 0 0.25rem;
+    border-radius: 0;
+    background: transparent;
+    color: var(--m-ink-hi);
+    border-bottom: 1px solid var(--m-accent);
+    min-height: var(--m-tap);
+    font-weight: 500;
+  }
+
+  /* Shared back-link: used on every subpage top-left. Readable against
+     both dark backgrounds and hero images (has its own scrim). */
+  .m-backlink {
+    position: fixed;
+    top: calc(var(--m-safe-t) + 0.7rem);
+    left: var(--m-pad-x);
+    z-index: calc(var(--m-z-nav) + 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: var(--m-tap);
+    padding: 0 0.95rem 0 0.75rem;
+    border-radius: 999px;
+    background: rgba(13,14,18,0.72);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    border: 1px solid var(--m-border-strong);
+    color: var(--m-ink-hi);
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 0.64rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    font-weight: 500;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      border-color var(--m-dur) var(--m-ease),
+      background var(--m-dur) var(--m-ease),
+      transform var(--m-dur-fast) var(--m-ease);
+  }
+  .m-backlink:active {
+    transform: scale(0.97);
+    border-color: var(--m-accent);
+    background: rgba(13,14,18,0.85);
+  }
+  .m-backlink-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--m-accent);
+    color: #06131d;
+    font-size: 0.7rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  /* Chip (small meta tag) */
+  .m-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--m-border);
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 0.56rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--m-ink-mid);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .m-chip--floating {
+    background: rgba(10,10,10,0.62);
+    color: var(--m-ink-hi);
+  }
+  .m-chip--accent {
+    border-color: var(--m-accent-soft);
+    color: var(--m-accent);
+    background: var(--m-accent-soft);
+  }
+
+  /* Section counter mark (e.g., "02 / 06") */
+  .m-sec-mark {
+    position: absolute;
+    top: var(--m-sp-7);
+    right: var(--m-pad-x);
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 0.52rem;
+    letter-spacing: 0.34em;
+    color: var(--m-ink-muted);
+  }
+  .m-sec-mark b {
+    color: var(--m-accent);
+    font-weight: 500;
+  }
+
+  /* Divider — gentle gradient, not a line */
+  .m-divider {
+    height: 1px;
+    width: 100%;
+    border: 0;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--m-border) 20%,
+      var(--m-border) 80%,
+      transparent 100%
+    );
+    margin: 0;
+  }
+
+  /* --- Aurora backdrop hooks ---------------------------------- */
+  .m-aurora {
+    position: fixed;
+    inset: -10% -5% -10% -5%;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+    will-change: transform;
+    contain: strict;
+  }
+  .m-aurora-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.55;
+    transform: translate3d(0, 0, 0);
+    will-change: transform, opacity;
+  }
+  .m-aurora-orb--cyan {
+    width: 62vw;
+    height: 62vw;
+    top: -8vw;
+    left: -16vw;
+    background: radial-gradient(closest-side, rgba(97,203,248,0.42) 0%, rgba(97,203,248,0) 70%);
+  }
+  .m-aurora-orb--warm {
+    width: 70vw;
+    height: 70vw;
+    bottom: -18vw;
+    right: -22vw;
+    background: radial-gradient(closest-side, rgba(243,194,138,0.28) 0%, rgba(243,194,138,0) 72%);
+  }
+  .m-aurora-orb--deep {
+    width: 50vw;
+    height: 50vw;
+    top: 40%;
+    left: 20%;
+    background: radial-gradient(closest-side, rgba(26,126,176,0.35) 0%, rgba(26,126,176,0) 72%);
+  }
+  .m-aurora-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.022) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.022) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at 50% 40%, black 0%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 0%, transparent 75%);
+  }
+
+  @keyframes m-drift-a {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    33%      { transform: translate3d(6vw, -4vw, 0); }
+    66%      { transform: translate3d(-4vw, 6vw, 0); }
+  }
+  @keyframes m-drift-b {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50%      { transform: translate3d(-8vw, 5vw, 0); }
+  }
+  @keyframes m-drift-c {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50%      { transform: translate3d(5vw, -7vw, 0); }
+  }
+
+  /* --- Scroll progress helper --------------------------------- */
+  .m-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    z-index: calc(var(--m-z-nav) + 1);
+    transform-origin: 0 50%;
+    pointer-events: none;
+  }
+  .m-progress-fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--m-accent) 0%, var(--m-warm) 100%);
+    transform-origin: 0 50%;
+  }
+
+  /* --- Link arrow — subtle but interactive -------------------- */
+  .m-arrow-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(10,10,10,0.62);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--m-ink-hi);
+    font-size: 0.95rem;
+    line-height: 1;
+    transition:
+      transform var(--m-dur-fast) var(--m-ease),
+      background var(--m-dur) var(--m-ease);
+  }
+
+  /* --- Text helpers (stronger hierarchy) ---------------------- */
+  .m-numerator {
+    font-family: var(--font-display), 'Labil Grotesk', sans-serif;
+    font-weight: 400;
+    font-size: clamp(3.2rem, 14vw, 4.8rem);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    color: var(--m-ink-hi);
+    display: inline-block;
+  }
+  .m-numerator-sup {
+    font-size: 0.32em;
+    vertical-align: super;
+    color: var(--m-accent);
+    letter-spacing: 0.1em;
+    margin-left: 0.2em;
+  }
+
+  /* --- Parallax container (for scroll-linked transforms) ------ */
+  .m-parallax {
+    will-change: transform;
+  }
+
+  /* Respect reduced motion preference everywhere */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .m-aurora-orb {
+      animation: none !important;
+    }
+  }
+}

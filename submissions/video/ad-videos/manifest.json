@@ -1,0 +1,33 @@
+{
+  "title": "Ad Videos",
+  "slug": "ad-videos",
+  "service": "video",
+  "mediaKind": "storage-video",
+  "published": false,
+  "featured": false,
+  "order": 0,
+  "primaryTalentId": "youssef-azzouggarh",
+  "collaboratorTalentIds": [],
+  "clientName": "Example Client",
+  "date": "2026",
+  "category": "advertising",
+  "type": "video",
+  "shortDescription": "Short portfolio description for gallery cards.",
+  "fullDescription": "Longer case-study copy for the portfolio detail page.",
+  "caseStudyCredit": "Director / Motion Designer",
+  "thumbnailFile": "cover/cover.jpg",
+  "heroFile": "cover/hero.jpg",
+  "galleryFiles": [
+    "gallery/01.jpg",
+    "gallery/02.jpg",
+    "gallery/03.jpg"
+  ],
+  "sourceVideoFile": "video/source.mp4",
+  "posterFile": "cover/poster.jpg",
+  "clientLogo": "/images/clients/postera.svg",
+  "tags": [
+    "advertising",
+    "campaign",
+    "video"
+  ]
+}

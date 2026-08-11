@@ -1,0 +1,371 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 14% 14%, rgba(255, 255, 255, 0.72), transparent 23%),
+    radial-gradient(circle at 84% 18%, rgba(255, 255, 255, 0.68), transparent 26%),
+    linear-gradient(180deg, #f4efe7 0%, #f3ede3 100%);
+  color: #17110d;
+}
+
+.page::before,
+.page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.page::before {
+  background:
+    radial-gradient(circle at 22% 60%, rgba(198, 154, 117, 0.09), transparent 32%),
+    radial-gradient(circle at 76% 72%, rgba(194, 153, 118, 0.08), transparent 30%);
+  opacity: 0.7;
+}
+
+.page::after {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.16), transparent 16%, transparent 84%, rgba(255, 255, 255, 0.16));
+  opacity: 0.35;
+}
+
+.canvas {
+  position: relative;
+  z-index: 1;
+  width: min(1088px, calc(100vw - 72px));
+  margin: 0 auto;
+  padding: 44px 0 72px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.breadcrumbPrimary {
+  color: #18120e;
+}
+
+.breadcrumbSlash {
+  color: rgba(23, 17, 13, 0.32);
+}
+
+.breadcrumbAccent {
+  color: #b57a59;
+}
+
+.returnWrap {
+  flex-shrink: 0;
+}
+
+.intro {
+  margin-top: 48px;
+  max-width: 58rem;
+}
+
+.introEyebrow {
+  display: inline-flex;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #b57a59;
+}
+
+.introTitle {
+  margin-top: 12px;
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 5vw, 5rem);
+  line-height: 0.9;
+  letter-spacing: -0.085em;
+  text-transform: uppercase;
+}
+
+.introBody {
+  margin-top: 16px;
+  max-width: 48rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.04rem, 1.35vw, 1.24rem);
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+  color: rgba(23, 17, 13, 0.8);
+}
+
+.talentList {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 42px;
+}
+
+.talentCard {
+  display: grid;
+  grid-template-columns: 420px minmax(0, 1fr);
+  gap: 26px;
+  padding: 22px;
+  border-radius: 28px;
+  background: rgba(255, 251, 245, 0.52);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 18px 40px rgba(165, 130, 96, 0.09);
+  color: inherit;
+  text-decoration: none;
+  backdrop-filter: blur(14px);
+}
+
+.talentCardReverse {
+  grid-template-columns: minmax(0, 1fr) 420px;
+}
+
+.talentCardReverse .mediaColumn {
+  order: 2;
+}
+
+.talentCardReverse .copyColumn {
+  order: 1;
+}
+
+.mediaColumn {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 14px;
+}
+
+.portraitVisual,
+.primaryPreview,
+.secondaryPreview {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0%, rgba(232, 223, 210, 0.95) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    0 12px 24px rgba(165, 130, 96, 0.08);
+}
+
+.portraitVisual {
+  height: 362px;
+}
+
+.portraitImage {
+  object-fit: cover;
+}
+
+.previewStrip {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.primaryPreview {
+  height: 214px;
+}
+
+.secondaryPreviews {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.secondaryPreview {
+  height: 134px;
+}
+
+.previewImage {
+  object-fit: cover;
+  transition: transform 360ms ease;
+}
+
+.talentCard:hover .previewImage,
+.talentCard:hover .portraitImage {
+  transform: scale(1.025);
+}
+
+.copyColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.collectionCount {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(248, 239, 226, 0.92);
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #17110d;
+}
+
+.talentName {
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-size: clamp(2.7rem, 4vw, 3.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.08em;
+  text-transform: uppercase;
+}
+
+.talentRole {
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b57a59;
+}
+
+.talentBio {
+  margin-top: 18px;
+  max-width: 30rem;
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  line-height: 1.32;
+  letter-spacing: -0.015em;
+  color: rgba(23, 17, 13, 0.82);
+}
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.projectRow {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.projectBullet {
+  width: 10px;
+  height: 10px;
+  margin-top: 6px;
+  border-radius: 999px;
+  background: rgba(181, 122, 89, 0.82);
+}
+
+.projectTitle {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.projectMeta {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  color: rgba(23, 17, 13, 0.62);
+}
+
+.cardAction {
+  margin-top: 26px;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b57a59;
+}
+
+@media (max-width: 1100px) {
+  .canvas {
+    width: min(960px, calc(100vw - 48px));
+    padding-top: 32px;
+  }
+
+  .talentCard,
+  .talentCardReverse {
+    grid-template-columns: 1fr;
+  }
+
+  .talentCardReverse .mediaColumn,
+  .talentCardReverse .copyColumn {
+    order: initial;
+  }
+}
+
+@media (max-width: 720px) {
+  .canvas {
+    width: calc(100vw - 24px);
+    padding-top: 22px;
+    padding-bottom: 40px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .breadcrumb {
+    gap: 10px;
+    font-size: 0.68rem;
+  }
+
+  .returnWrap {
+    width: 100%;
+  }
+
+  .intro {
+    margin-top: 30px;
+  }
+
+  .introTitle {
+    font-size: clamp(2.35rem, 11vw, 3.4rem);
+  }
+
+  .introBody {
+    font-size: 1rem;
+    line-height: 1.34;
+  }
+
+  .talentCard {
+    padding: 16px;
+    gap: 18px;
+    border-radius: 24px;
+  }
+
+  .mediaColumn {
+    grid-template-columns: 1fr;
+  }
+
+  .portraitVisual,
+  .primaryPreview,
+  .secondaryPreview {
+    height: auto;
+    aspect-ratio: 16 / 11;
+  }
+
+  .secondaryPreviews {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .talentName {
+    font-size: clamp(2.1rem, 12vw, 3rem);
+  }
+}
